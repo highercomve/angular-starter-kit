@@ -7,7 +7,8 @@ routes.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "./partials/home.html"
+      controller: 'exampleController',
+      templateUrl: "example/controller.html"
     })
   $urlRouterProvider.otherwise("/")
 })

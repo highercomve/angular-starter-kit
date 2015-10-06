@@ -15,16 +15,17 @@ var gulp = require('gulp'),
     del = require('del'),
     Q = require('q'),
     streamify = require('gulp-streamify'),
+    globbing = require('gulp-css-globbing')
     sass = require('gulp-sass');
 
 var source_paths = {
-  sass: './source/sass/**/*.scss',
-  js: './source/js/app.js',
-  all_js: './source/js/**/*.js',
-  html: './source/html/**/*.html',
-  html_index: './source/html/index.html',
-  partials: './source/html/partials/**/*.html',
-  partials_dest: './source/js/partials',
+  sass: './source/**/*.scss',
+  js: './source/app.js',
+  all_js: './source/**/*.js',
+  all_html: './source/**/*.html',
+  html_index: './source/index.html',
+  partials: './source/components/**/*.html',
+  partials_dest: './source/partials',
   dev_css: './build/css',
   dev_js: './build/js',
   dev_html: './build/',
@@ -54,6 +55,7 @@ tasks = {
   },
   prodCss: function() {
     return gulp.src(source_paths.sass)
+      .pipe(globbing({extensions: ['.scss']}))
       .pipe(sass.sync().on('error', sass.logError))
       .pipe(minifyCss({compatibility: 'ie8'}))
       .pipe(rename(tasks.assetProdName('css')))
@@ -61,6 +63,7 @@ tasks = {
   },
   devCss: function() {
     return gulp.src(source_paths.sass)
+      .pipe(globbing({extensions: ['.scss']}))
       .pipe(sass.sync().on('error', sass.logError))
       .pipe(gulp.dest(source_paths.dev_css));
   },
@@ -81,11 +84,9 @@ tasks = {
         quotes: true
       }))
       .pipe(ngHtml2Js({
-        moduleName: "App.partialsPrecompile",
-        prefix: "./partials/"
+        moduleName: "App.partialsPrecompile"
       }))
-      .pipe(concat("all.js"))
-      .pipe(uglify())
+      .pipe(concat("index.js"))
       .pipe(gulp.dest(dest))
   },
   assetProdName: function(type) {
@@ -129,7 +130,7 @@ gulp.task('build', ['inject'])
 gulp.task('build:watch', ['build'], function() {
   gulp.watch(source_paths.sass, ['sass'])
   gulp.watch(source_paths.all_js, ['browserify'])
-  gulp.watch(source_paths.html, ['inject'])
+  gulp.watch(source_paths.all_html, ['inject'])
 });
 
 gulp.task('dist', ['clean','inject:prod']);

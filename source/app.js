@@ -1,15 +1,13 @@
 import angular from 'angular'
-import services from './services/all'
-import controllers from './controllers/all'
-import directives from './directives/all'
-import partials from './partials/all'
+import components from './components'
+import services from './services'
+import partials from './partials'
 import routes from './routes'
 
 angular.module('App', [
-  'App.directives',
+  'App.components',
   'App.partialsPrecompile',
   'App.services',
-  'App.controllers',
   'App.routes'
 ])
 
