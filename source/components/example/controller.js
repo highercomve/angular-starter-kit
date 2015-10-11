@@ -1,3 +1,7 @@
-export default function($scope) {
-  $scope.helloMessage = "Hello from a controller router"
+export default function(ngComponent) {
+  ngComponent.controller('exampleController', ExampleController)
+
+  function ExampleController($scope, exampleFactory) {
+    $scope.helloMessage = "Hello from a controller router"
+  }
 }

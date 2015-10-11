@@ -15,12 +15,14 @@ var gulp = require('gulp'),
     del = require('del'),
     Q = require('q'),
     streamify = require('gulp-streamify'),
-    globbing = require('gulp-css-globbing')
+    globbing = require('gulp-css-globbing'),
+    ngAnnotate = require('gulp-ng-annotate'),
     sass = require('gulp-sass');
 
 var source_paths = {
-  sass: './source/**/*.scss',
+  sass: './source/sass/app.scss',
   js: './source/app.js',
+  all_sass: './source/**/*.scss',
   all_js: './source/**/*.js',
   all_html: './source/**/*.html',
   html_index: './source/index.html',
@@ -44,8 +46,8 @@ tasks = {
   },
   prodBrowserify: function() {
     return this.baseBrowserify()
-      //.pipe(ngAnnotate())
-      .pipe(streamify(uglify({mangle: false})))
+      .pipe(ngAnnotate())
+      .pipe(streamify(uglify()))
       .pipe(rename(tasks.assetProdName('js')))
       .pipe(gulp.dest(source_paths.prod_js))
   },
@@ -128,7 +130,7 @@ gulp.task('inject:prod',['ngHtml'], function() {
 gulp.task('build', ['inject'])
 
 gulp.task('build:watch', ['build'], function() {
-  gulp.watch(source_paths.sass, ['sass'])
+  gulp.watch(source_paths.all_sass, ['sass'])
   gulp.watch(source_paths.all_js, ['browserify'])
   gulp.watch(source_paths.all_html, ['inject'])
 });

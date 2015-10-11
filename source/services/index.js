@@ -1,12 +1,18 @@
 import angular from 'angular'
+import ngResource from 'ng-resource'
 
-let services = angular.module('App.services', [])
+// the ng-resource librery, don't autoexecute therefore:
+ngResource(window, angular)
+
+angular.module('App.services', ['ngResource'])
+
+let services = angular.module('App.services')
 
 // services.run(() => {
 //   console.log('Running services module')
 // })
 
 // How to add factories or services to the services module
-// services.factory('ExampleFactory',require('./example-factory'))
+require('./example-factory.js')(services)
 
 export default services
