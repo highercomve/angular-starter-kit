@@ -3,9 +3,10 @@ export default function(ngComponent) {
 
   function ExampleDirective() {
     return {
-      restrict: 'E',
+      restrict: 'E',  
       templateUrl: 'example/directive.html',
       link(scope, element, attrs) {
+        scope.message = attrs.message
       },
     }
   }

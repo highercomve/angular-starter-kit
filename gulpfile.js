@@ -17,6 +17,7 @@ var gulp = require('gulp'),
     streamify = require('gulp-streamify'),
     globbing = require('gulp-css-globbing'),
     ngAnnotate = require('gulp-ng-annotate'),
+    Server = require('karma').Server;
     sass = require('gulp-sass');
 
 var source_paths = {
@@ -145,6 +146,25 @@ gulp.task('serve', ['build:watch'],function() {
 gulp.task('serve:dist',function() {
   gulp.src('dist')
     .pipe(webserver({open: true}));
+});
+
+/**
+*  * Run test once and exit
+*   */
+gulp.task('test', ['build'] ,function (done) {
+  new Server({
+    configFile: __dirname + '/test/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
+/**
+*  * Watch for file changes and re-run tests on each change
+*   */
+gulp.task('tdd', ['build:watch'], function (done) {
+  new Server({
+    configFile: __dirname + '/test/karma.conf.js'
+  }, done).start();
 });
 
 gulp.task('default', ['build']);
