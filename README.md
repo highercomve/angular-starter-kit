@@ -56,3 +56,30 @@ gulp serve:dist
 ```
 
 A local server to serve the files on dist folder.
+
+### End to End test with protractor
+
+You have to install protractor
+
+```
+npm install -g protractor
+webdriver-manager update
+```
+
+And then to run the test start a selenium webdriver server
+
+```
+webdriver-manager start
+```
+
+Later start the server 
+
+```
+gulp serve
+```
+
+Last run the test
+
+```
+gulp 2e2
+```

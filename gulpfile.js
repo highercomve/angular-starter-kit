@@ -17,7 +17,8 @@ var gulp = require('gulp'),
     streamify = require('gulp-streamify'),
     globbing = require('gulp-css-globbing'),
     ngAnnotate = require('gulp-ng-annotate'),
-    Server = require('karma').Server;
+    Server = require('karma').Server,
+    protractor = require('gulp-protractor').protractor,
     sass = require('gulp-sass');
 
 var source_paths = {
@@ -35,6 +36,9 @@ var source_paths = {
   prod_css: './dist/css',
   prod_js: './dist/js',
   prod_html: './dist',
+  unit_test: __dirname + '/test/karma.conf.js',
+  protractor_test: './test/protractor.conf.js',
+  e2e: ['./test/e2e/**/*.js'],
 }
 
 tasks = {
@@ -153,7 +157,7 @@ gulp.task('serve:dist',function() {
 *   */
 gulp.task('test', ['build'] ,function (done) {
   new Server({
-    configFile: __dirname + '/test/karma.conf.js',
+    configFile: source_paths.unit_test,
     singleRun: true
   }, done).start();
 });
@@ -163,8 +167,16 @@ gulp.task('test', ['build'] ,function (done) {
 *   */
 gulp.task('tdd', ['build:watch'], function (done) {
   new Server({
-    configFile: __dirname + '/test/karma.conf.js'
+    configFile: source_paths.unit_test  
   }, done).start();
 });
+
+gulp.task('e2e', function() {
+  gulp.src(source_paths.e2e)
+  .pipe(protractor({
+    configFile: source_paths.protractor_test,
+  }))
+  .on('error', function(e) { throw e })
+})
 
 gulp.task('default', ['build']);

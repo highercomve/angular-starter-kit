@@ -42,5 +42,9 @@
     "q": "^1.4.1",
     "uglifyify": "^3.0.1",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "gulp-protractor": "^1.0.0",
+    "protractor": "^2.5.1"
   }
 }
