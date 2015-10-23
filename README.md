@@ -32,8 +32,20 @@ gulp serve
 
 Open a server in port 8000 for development with livereload
 
-```dist
+```bash
 gulp dist
+```
+
+Run test suit
+
+```bash
+gulp test
+```
+
+Run test suit with watch and reload test every change on source files
+
+```bash
+gulp tdd
 ```
 
 Create a folder dist, with de minify version of the files. This files are ready
