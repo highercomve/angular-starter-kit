@@ -2,7 +2,7 @@ import angular from 'angular'
 import components from './components'
 import services from './services'
 import partials from './partials'
-import routes from './routes'
+import routes from './conf/routes'
 
 angular.module('App', [
   'App.components',

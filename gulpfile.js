@@ -47,6 +47,7 @@ tasks = {
           transform: ['babelify']
       })
       .bundle()
+      .on('error', function(e) { console.log(e.message) })
       .pipe(source('app.js'))
   },
   prodBrowserify: function() {
