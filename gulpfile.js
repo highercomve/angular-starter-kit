@@ -19,6 +19,7 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     Server = require('karma').Server,
     protractor = require('gulp-protractor').protractor,
+    envify = require('envify'),
     sass = require('gulp-sass');
 
 var source_paths = {
@@ -44,7 +45,10 @@ var source_paths = {
 tasks = {
   baseBrowserify: function() {
    return browserify([source_paths.js], {
-          transform: ['babelify']
+        transform: [
+          'envify',
+          ['babelify', { compact: false }]
+        ]
       })
       .bundle()
       .on('error', function(e) { console.log(e.message) })
