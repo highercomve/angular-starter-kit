@@ -115,23 +115,23 @@ gulp.task('clean', function() {
   return deferred.promise;
 });
 
-gulp.task('sass', function() { tasks.devCss() })
+gulp.task('sass', tasks.devCss)
 
-gulp.task('browserify', function() { tasks.devBrowserify()})
+gulp.task('browserify', tasks.devBrowserify)
 
 gulp.task('ngHtml', function() {
-  tasks.BaseNgHtml(source_paths.partials_dest)
+  return tasks.BaseNgHtml(source_paths.partials_dest)
 })
 
 gulp.task('inject', ['ngHtml'], function() {
-  tasks.injectHtml(
+  return tasks.injectHtml(
     source_paths.dev_html,
     es.merge(tasks.devCss(), tasks.devBrowserify())
   )
 })
 
 gulp.task('inject:prod',['ngHtml'], function() {
-  tasks.injectHtml(
+  return tasks.injectHtml(
     source_paths.prod_html,
     es.merge(tasks.prodCss(), tasks.prodBrowserify())
   )
@@ -148,12 +148,12 @@ gulp.task('build:watch', ['build'], function() {
 gulp.task('dist', ['clean','inject:prod']);
 
 gulp.task('serve', ['build:watch'],function() {
-  gulp.src('build')
+  return gulp.src('build')
     .pipe(webserver({open: true, livereload: true}));
 });
 
 gulp.task('serve:dist',function() {
-  gulp.src('dist')
+  return gulp.src('dist')
     .pipe(webserver({open: true}));
 });
 
@@ -161,7 +161,7 @@ gulp.task('serve:dist',function() {
 *  * Run test once and exit
 *   */
 gulp.task('test', ['build'] ,function (done) {
-  new Server({
+  return new Server({
     configFile: source_paths.unit_test,
     singleRun: true
   }, done).start();
@@ -171,13 +171,13 @@ gulp.task('test', ['build'] ,function (done) {
 *  * Watch for file changes and re-run tests on each change
 *   */
 gulp.task('tdd', ['build:watch'], function (done) {
-  new Server({
-    configFile: source_paths.unit_test  
+  return new Server({
+    configFile: source_paths.unit_test
   }, done).start();
 });
 
 gulp.task('e2e', function() {
-  gulp.src(source_paths.e2e)
+  return gulp.src(source_paths.e2e)
   .pipe(protractor({
     configFile: source_paths.protractor_test,
   }))
