@@ -28,6 +28,7 @@ var source_paths = {
   all_sass: './source/**/*.scss',
   all_js: './source/**/*.js',
   all_html: './source/**/*.html',
+  images: './sources/images/**/*',
   html_index: './source/index.html',
   partials: './source/components/**/*.html',
   partials_dest: './source/partials',
@@ -45,11 +46,10 @@ var source_paths = {
 tasks = {
   baseBrowserify: function() {
    return browserify([source_paths.js], {
-        transform: [
-          'envify',
-          ['babelify', { compact: false }]
-        ]
-      })
+      transform: [
+        'babelify'
+      ]})
+      .transform('envify')
       .bundle()
       .on('error', function(e) { console.log(e.message) })
       .pipe(source('app.js'))
@@ -72,6 +72,10 @@ tasks = {
       .pipe(minifyCss({compatibility: 'ie8'}))
       .pipe(rename(tasks.assetProdName('css')))
       .pipe(gulp.dest(source_paths.prod_css));
+  },
+  copyImages: function(type) {
+    return gulp.src(source_paths.images)
+        .pipe(gulp.dest('./'+type+'/images'));
   },
   devCss: function() {
     return gulp.src(source_paths.sass)
@@ -126,14 +130,14 @@ gulp.task('ngHtml', function() {
 gulp.task('inject', ['ngHtml'], function() {
   return tasks.injectHtml(
     source_paths.dev_html,
-    es.merge(tasks.devCss(), tasks.devBrowserify())
+    es.merge(tasks.devCss(), tasks.copyImages('build'),tasks.devBrowserify())
   )
 })
 
 gulp.task('inject:prod',['ngHtml'], function() {
   return tasks.injectHtml(
     source_paths.prod_html,
-    es.merge(tasks.prodCss(), tasks.prodBrowserify())
+    es.merge(tasks.prodCss(), tasks.copyImages('dist'), tasks.prodBrowserify())
   )
 });
 
