@@ -3,7 +3,6 @@ import components from './components'
 import services from './services'
 import partials from './partials'
 import routes from './conf/routes'
-const node_env = process.env.NODE_ENV || 'development'
 
 angular.module('App', [
   'App.components',
@@ -12,10 +11,16 @@ angular.module('App', [
   'App.routes'
 ])
 
-angular.module('App').constant('ENV', {
-  app_name: 'New app',
-  type: node_env,
-})
+/*
+ * You can add environment variables using envify and this sintax
+ *
+  const node_env = process.env.NODE_ENV || 'development'
+
+  angular.module('App').constant('ENV', {
+    app_name: 'New app',
+    type: node_env,
+  })
+*/
 
 angular.bootstrap(document.body, ['App'])
 

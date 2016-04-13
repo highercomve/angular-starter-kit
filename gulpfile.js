@@ -55,14 +55,14 @@ tasks = {
       .pipe(source('app.js'))
   },
   prodBrowserify: function() {
-    return this.baseBrowserify()
+    return tasks.baseBrowserify()
       .pipe(ngAnnotate())
       .pipe(streamify(uglify()))
       .pipe(rename(tasks.assetProdName('js')))
       .pipe(gulp.dest(source_paths.prod_js))
   },
   devBrowserify: function() {
-    return this.baseBrowserify()
+    return tasks.baseBrowserify()
       .pipe(gulp.dest(source_paths.dev_js));
   },
   prodCss: function() {

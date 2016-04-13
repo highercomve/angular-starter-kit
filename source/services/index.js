@@ -1,10 +1,11 @@
 import angular from 'angular'
-import ngResource from 'ng-resource'
+// You can add here dependencies that
+// import ngResource from 'ng-resource'
 
-// the ng-resource librery, don't autoexecute therefore:
-ngResource(window, angular)
+// the ng-resource library, don't autoexecute therefore:
+// ngResource(window, angular)
 
-angular.module('App.services', ['ngResource'])
+angular.module('App.services', [])
 
 let services = angular.module('App.services')
 

@@ -9,9 +9,9 @@ const components = angular.module('App.components')
 // })
 
 // How to add controller to the components module
-require('./example/controller.js')(components);
+require('./example_controller')(components);
 
 // How to add a directive to the components module
-require('./example/directive.js')(components);
+require('./example_directive')(components);
 
 export default components

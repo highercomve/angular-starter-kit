@@ -2,22 +2,26 @@ export default function(ngComponent) {
   ngComponent.factory('exampleFactory', ExampleFactory)
 
   function ExampleFactory($resource) {
-    let privateVariable
-    let Model = $resource('/url/:id', { id: '@id'})
+    /*
+     * Example content for a Service that will use ngResource
+     *
+      let privateVariable
+      let Model = $resource('/url/:id', { id: '@id'})
 
-    Model.prototype.publicVariable = 'Data'
+      Model.prototype.publicVariable = 'Data'
 
-    Model.classMethod = () => {
+      Model.classMethod = () => {
 
-    }
+      }
 
-     Model.prototype.instanceMethod = () => {
+       Model.prototype.instanceMethod = () => {
 
-    }  
+      }
 
-    function PrivateFunction() {
+      function PrivateFunction() {
 
-    }
-    return Model
+      }
+      return Model
+    */
   }
 }

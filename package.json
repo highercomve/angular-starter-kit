@@ -1,7 +1,7 @@
 {
-  "name": "escuelaweb-todo-angular",
+  "name": "angular-starter-kit",
   "version": "1.0.0",
-  "description": "Introduccion a Angular",
+  "description": "My angular default project schema",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,9 +13,9 @@
   "author": "Sergio Marin",
   "license": "ISC",
   "devDependencies": {
-    "angular": "^1.4.6",
+    "angular": "^1.5.3",
     "angular-mocks": "^1.4.7",
-    "angular-ui-router": "^0.2.15",
+    "angular-ui-router": "^0.2.18",
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "del": "^2.0.2",
@@ -36,13 +36,17 @@
     "gulp-uglify": "^1.4.1",
     "gulp-webserver": "^0.9.1",
     "jasmine-core": "^2.3.4",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "*",
-    "ng-resource": "^1.3.2",
+    "karma": "^0.13.22",
+    "karma-browserify": "^5.0.3",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0",
     "node-uuid": "^1.4.3",
+    "phantomjs-prebuilt": "^2.1.7",
     "q": "^1.4.1",
     "uglifyify": "^3.0.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
     "gulp-protractor": "^1.0.0",
